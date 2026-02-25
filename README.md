@@ -4,6 +4,14 @@ A modern, data-obsessed growth engineering firm website.
 ## Overview
 BrandGrowth Media provides measurable and scalable growth systems for ambitious brands. The platform is built with a focus on high-performance web development, AI automation, and paid acquisition marketing (Google, Facebook, Instagram Ads, Local SEO, etc.).
 
+## Screenshots
+
+### Homepage
+![Homepage Screenshot](assets/images/homepage.png)
+
+### Services Page
+![Services Page Screenshot](assets/images/service%20screenshot.png)
+
 ## Features
 - **Responsive Layout**: Engineered for all screen sizes, including targeted mobile breakpoints.
 - **Service Specific Call-To-Actions**: Highly detailed individual service pages with cross-navigation.
