@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrandGrowth Media — We Engineer Growth</title>
+  <meta name="description"
+    content="BrandGrowth Media is a data-obsessed growth engineering firm. We build measurable, scalable growth systems for ambitious brands.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css?v=3">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+
+<body>
+  <div class="scroll-progress"></div>
+
+  <!-- Header — 6 items only -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="BrandGrowth Media" class="logo-img"></a>
+      <nav>
+        <ul class="main-nav">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="case-studies.html" class="nav-link">Case Studies</a></li>
+          <li><a href="process.html" class="nav-link">Process</a></li>
+          <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta"><a href="contact.html" class="btn btn-primary btn-sm">Get a Proposal</a></div>
+      <button class="mobile-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="mobile-nav-overlay">
+    <div class="mobile-nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="case-studies.html">Case Studies</a>
+      <a href="process.html">Process</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <p class="overline reveal">Predictable Clients. Scalable Growth.</p>
+          <h1 class="h-display reveal">We Turn Your Local Business Into a <span class="accent">Lead-Generating</span>
+            Machine</h1>
+          <p class="hero-subtitle reveal">Stop Relying on Referrals. Start Owning Your Lead Flow. We build
+            high-converting websites, run profitable Google & Meta ads, and
+            install automation systems that bring you consistent clients — not just traffic.</p>
+          <div class="hero-ctas reveal">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a Project</a>
+            <a href="case-studies.html" class="btn btn-secondary btn-lg">View Results</a>
+          </div>
+          <div class="hero-metrics reveal">
+            <div class="hero-metric">
+              <div class="number" data-count="340" data-suffix="+">0+</div>
+              <div class="label">Projects Delivered</div>
+            </div>
+            <div class="hero-metric">
+              <div class="number" data-count="4" data-suffix=".2x">0x</div>
+              <div class="label">Avg. Revenue Growth</div>
+            </div>
+            <div class="hero-metric">
+              <div class="number" data-count="97" data-suffix="%">0%</div>
+              <div class="label">Client Retention</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Card — floating, pure CSS/HTML -->
+        <div class="hero-visual reveal-right">
+          <div class="dashboard-card">
+            <!-- Window bar -->
+            <div class="dash-bar">
+              <div class="dash-dots"><span class="dot dot--red"></span><span class="dot dot--yellow"></span><span
+                  class="dot dot--green"></span></div>
+              <span class="dash-title">Growth Dashboard</span>
+            </div>
+
+            <!-- KPI Row -->
+            <div class="dash-kpis">
+              <div class="dash-kpi">
+                <div class="kpi-label">REVENUE</div>
+                <div class="kpi-value">$92.4K</div>
+                <div class="kpi-change up">↑ 412%</div>
+              </div>
+              <div class="dash-kpi">
+                <div class="kpi-label">ROAS</div>
+                <div class="kpi-value">4.8x</div>
+                <div class="kpi-change up">↑ 2.1x</div>
+              </div>
+              <div class="dash-kpi">
+                <div class="kpi-label">CPA</div>
+                <div class="kpi-value">$18.40</div>
+                <div class="kpi-change down">↓ 62%</div>
+              </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="dash-chart-section">
+              <div class="dash-chart-title">MONTHLY REVENUE GROWTH</div>
+              <svg class="dash-chart" viewBox="0 0 520 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#F5A623" stop-opacity="0.25" />
+                    <stop offset="100%" stop-color="#F5A623" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                <!-- Grid lines -->
+                <line x1="0" y1="30" x2="520" y2="30" stroke="rgba(100,116,139,0.1)" stroke-width="1" />
+                <line x1="0" y1="70" x2="520" y2="70" stroke="rgba(100,116,139,0.1)" stroke-width="1" />
+                <line x1="0" y1="110" x2="520" y2="110" stroke="rgba(100,116,139,0.1)" stroke-width="1" />
+                <line x1="0" y1="150" x2="520" y2="150" stroke="rgba(100,116,139,0.1)" stroke-width="1" />
+                <!-- Area -->
+                <path
+                  d="M0,140 C30,138 55,135 80,130 C120,120 150,115 180,105 C210,95 240,90 270,82 C300,74 330,65 360,50 C390,38 420,28 450,18 C470,12 500,8 520,5 L520,150 L0,150 Z"
+                  fill="url(#areaGrad)" class="chart-area" />
+                <!-- Line -->
+                <path
+                  d="M0,140 C30,138 55,135 80,130 C120,120 150,115 180,105 C210,95 240,90 270,82 C300,74 330,65 360,50 C390,38 420,28 450,18 C470,12 500,8 520,5"
+                  stroke="#F5A623" stroke-width="2.5" stroke-linecap="round" fill="none" class="chart-line" />
+                <!-- Data dots -->
+                <circle cx="80" cy="130" r="4" fill="#F5A623" class="chart-dot" />
+                <circle cx="180" cy="105" r="4" fill="#F5A623" class="chart-dot" />
+                <circle cx="270" cy="82" r="4" fill="#F5A623" class="chart-dot" />
+                <circle cx="360" cy="50" r="4" fill="#F5A623" class="chart-dot" />
+                <circle cx="450" cy="18" r="5" fill="#F5A623" stroke="#0B1222" stroke-width="2" class="chart-dot" />
+              </svg>
+              <!-- X-axis labels -->
+              <div class="dash-x-labels">
+                <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span>
+              </div>
+            </div>
+
+            <!-- Channel Bars -->
+            <div class="dash-channels">
+              <div class="channel-row">
+                <span class="channel-dot" style="background:#F5A623;"></span>
+                <span class="channel-name">Paid Social</span>
+                <div class="channel-bar-bg">
+                  <div class="channel-bar" style="width:78%;background:#F5A623;"></div>
+                </div>
+                <span class="channel-pct">78%</span>
+              </div>
+              <div class="channel-row">
+                <span class="channel-dot" style="background:#3B82F6;"></span>
+                <span class="channel-name">Google Ads</span>
+                <div class="channel-bar-bg">
+                  <div class="channel-bar" style="width:56%;background:#3B82F6;"></div>
+                </div>
+                <span class="channel-pct">56%</span>
+              </div>
+              <div class="channel-row">
+                <span class="channel-dot" style="background:#34D399;"></span>
+                <span class="channel-name">Organic SEO</span>
+                <div class="channel-bar-bg">
+                  <div class="channel-bar" style="width:42%;background:#34D399;"></div>
+                </div>
+                <span class="channel-pct">42%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Do -->
+  <section class="section" style="border-top: 1px solid var(--border-light); padding-bottom: var(--space-10);">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="overline">What We Do</p>
+        <h2 class="h2">Six services.<br>One growth engine.</h2>
+      </div>
+      <div class="grid grid-3 stagger-children mobile-carousel">
+        <a href="services.html#website-development" class="card reveal service-card-link">
+          <h4 class="h5" style="margin-bottom: var(--space-3);">Website Development</h4>
+          <p style="font-size: var(--text-sm); color: var(--steel); line-height: var(--leading-relaxed);">
+            High-performance websites built to convert traffic into leads and sales, optimized for speed, UX, and
+            growth.</p>
+        </a>
+        <a href="services.html#google-ads" class="card reveal service-card-link">
+          <h4 class="h5" style="margin-bottom: var(--space-3);">Google Ads</h4>
+          <p style="font-size: var(--text-sm); color: var(--steel); line-height: var(--leading-relaxed);">High-intent
+            search campaigns engineered to generate consistent, measurable ROI from ready-to-buy customers.</p>
+        </a>
+        <a href="services.html#social-ads" class="card reveal service-card-link">
+          <h4 class="h5" style="margin-bottom: var(--space-3);">Facebook &amp; Instagram Ads</h4>
+          <p style="font-size: var(--text-sm); color: var(--steel); line-height: var(--leading-relaxed);">Scalable paid
+            social campaigns designed to drive qualified leads and customer acquisition at predictable costs.</p>
+        </a>
+        <a href="services.html#local-seo" class="card reveal service-card-link">
+          <h4 class="h5" style="margin-bottom: var(--space-3);">Local SEO &amp; Maps</h4>
+          <p style="font-size: var(--text-sm); color: var(--steel); line-height: var(--leading-relaxed);">Strategic
+            optimization to rank higher in local searches and dominate your service area on Google.</p>
+        </a>
+        <a href="services.html#social-media" class="card reveal service-card-link">
+          <h4 class="h5" style="margin-bottom: var(--space-3);">Social Media Management</h4>
+          <p style="font-size: var(--text-sm); color: var(--steel); line-height: var(--leading-relaxed);">
+            Authority-driven content strategy and consistent brand positioning to build trust and engagement.</p>
+        </a>
+        <a href="services.html#ai-automation" class="card reveal service-card-link"
+          style="border-color: var(--amber); background: var(--amber-glow);">
+          <h4 class="h5" style="margin-bottom: var(--space-3); color: var(--amber);">AI Automation</h4>
+          <p style="font-size: var(--text-sm); color: var(--steel-light); line-height: var(--leading-relaxed);">Custom
+            AI-powered systems that capture, qualify, follow up, and convert leads automatically.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section section--surface">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="overline">Proven Results</p>
+        <h2 class="h2">Work that moves the needle.</h2>
+      </div>
+      <div class="grid grid-2 stagger-children">
+        <div class="card reveal">
+          <div class="tag tag--amber" style="margin-bottom: var(--space-6);">SaaS</div>
+          <h3 class="h4" style="margin-bottom: var(--space-3);">NovaTech — 3x Pipeline in 6 Months</h3>
+          <p style="font-size: var(--text-sm); color: var(--steel); margin-bottom: var(--space-6);">Rebuilt demand-gen
+            engine with ABM campaigns, targeted content, and conversion-optimized landing pages.</p>
+          <div style="display: flex; gap: var(--space-8);">
+            <div>
+              <div class="metric-number">312%</div>
+              <div class="metric-label">Lead Growth</div>
+            </div>
+            <div>
+              <div class="metric-number">-42%</div>
+              <div class="metric-label">CAC</div>
+            </div>
+            <div>
+              <div class="metric-number">3.1x</div>
+              <div class="metric-label">Pipeline ROI</div>
+            </div>
+          </div>
+        </div>
+        <div class="card reveal">
+          <div class="tag tag--amber" style="margin-bottom: var(--space-6);">E-Commerce</div>
+          <h3 class="h4" style="margin-bottom: var(--space-3);">Luxe & Co — $2M → $8M Revenue</h3>
+          <p style="font-size: var(--text-sm); color: var(--steel); margin-bottom: var(--space-6);">Full-funnel overhaul
+            — creative testing, checkout UX redesign, and email/SMS retention flows.</p>
+          <div style="display: flex; gap: var(--space-8);">
+            <div>
+              <div class="metric-number">4x</div>
+              <div class="metric-label">Revenue</div>
+            </div>
+            <div>
+              <div class="metric-number">5.8x</div>
+              <div class="metric-label">ROAS</div>
+            </div>
+            <div>
+              <div class="metric-number">+67%</div>
+              <div class="metric-label">AOV</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" style="margin-top: var(--space-6); text-align: center;">
+        <a href="case-studies.html" class="btn btn-ghost">View all case studies →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="section" style="padding-top: var(--space-12); padding-bottom: var(--space-6);">
+    <div class="container">
+      <div class="testimonial-card reveal"
+        style="max-width: 720px; margin: 0 auto; text-align: center; border: none; padding: clamp(2rem, 5vw, 4rem);">
+        <blockquote style="font-size: var(--text-xl); line-height: 1.6; margin-bottom: var(--space-10);">"BrandGrowth
+          didn't just run ads for us — they rebuilt our entire growth infrastructure. Pipeline tripled in six months."
+        </blockquote>
+        <div class="testimonial-author" style="justify-content: center;">
+          <div class="avatar">SL</div>
+          <div style="text-align: left;">
+            <div class="name">Sarah Lin</div>
+            <div class="role">CMO, NovaTech</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta-section">
+    <div class="container">
+      <p class="overline reveal" style="margin-bottom: var(--space-4);">Ready?</p>
+      <h2 class="h2 reveal">Let's engineer your next phase of growth.</h2>
+      <p class="reveal">No pitch decks. No fluff. A real conversation about your goals.</p>
+      <div class="reveal" style="margin-top: var(--space-6);"><a href="contact.html"
+          class="btn btn-primary btn-lg">Start a Project</a></div>
+    </div>
+  </section>
+
+  <!-- Footer — enriched with About, Careers, Resources, etc. -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="BrandGrowth Media"
+              class="logo-img"></a>
+          <p>A data-obsessed growth engineering firm. We build measurable, scalable growth systems for ambitious brands.
+          </p>
+          <div class="footer-social">
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Instagram">ig</a>
+            <a href="#" aria-label="YouTube">yt</a>
+            <a href="#" aria-label="Twitter">tw</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="about.html">About Us</a>
+          <a href="process.html">Our Process</a>
+          <a href="careers.html">Careers</a>
+          <a href="testimonials.html">Testimonials</a>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <a href="services.html">Website Development</a>
+          <a href="services.html">Google Ads</a>
+          <a href="services.html">Facebook &amp; Instagram Ads</a>
+          <a href="services.html">Local SEO</a>
+          <a href="services.html">Social Media</a>
+          <a href="services.html">AI Automation</a>
+        </div>
+        <div class="footer-col">
+          <h5>Resources</h5>
+          <a href="resources.html">Blog</a>
+          <a href="resources.html">Guides & Templates</a>
+          <a href="resources.html">Webinars</a>
+          <a href="case-studies.html">Case Studies</a>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <a href="contact.html">Contact Us</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="solutions.html">Industries</a>
+          <a href="portal.html">Client Portal</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 BrandGrowth Media. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+  <script src="js/pages.js"></script>
+</body>
+
+</html>

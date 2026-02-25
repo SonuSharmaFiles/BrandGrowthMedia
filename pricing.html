@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing — BrandGrowth Media</title>
+    <meta name="description"
+        content="Transparent pricing for growth engineering. Three tiers designed for different stages of growth.">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+
+<body>
+    <div class="scroll-progress"></div>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="BrandGrowth Media" class="logo-img"></a>
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="case-studies.html" class="nav-link">Case Studies</a></li>
+                    <li><a href="process.html" class="nav-link">Process</a></li>
+                    <li><a href="pricing.html" class="nav-link active">Pricing</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-cta"><a href="contact.html" class="btn btn-primary btn-sm">Get a Proposal</a></div>
+            <button class="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+    <div class="mobile-nav-overlay">
+        <div class="mobile-nav-links">
+            <a href="index.html">Home</a><a href="services.html">Services</a><a href="case-studies.html">Case
+                Studies</a>
+            <a href="process.html">Process</a><a href="pricing.html">Pricing</a><a href="contact.html">Contact</a>
+        </div>
+    </div>
+
+    <section class="page-hero text-center">
+        <div class="container">
+            <p class="overline reveal">Pricing</p>
+            <h1 class="h1 reveal">Transparent pricing.<br>No surprises.</h1>
+            <p class="reveal" style="margin: 0 auto;">Three tiers designed for different stages of growth. All include
+                full reporting and a dedicated strategist.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="pricing-toggle reveal">
+                <span class="active" id="monthly-label">Monthly</span>
+                <div class="toggle-switch" id="pricing-toggle"></div>
+                <span id="annual-label">Annual <span style="color: var(--amber); font-weight: 600;">Save
+                        20%</span></span>
+            </div>
+
+            <div class="pricing-grid stagger-children">
+                <div class="pricing-card reveal">
+                    <div class="plan-name">Growth</div>
+                    <div class="price" data-monthly="5,000" data-annual="4,000">$5,000<span>/mo</span></div>
+                    <div class="plan-desc">For early-stage companies ready to build their first growth engine.</div>
+                    <ul class="features-list">
+                        <li><span class="check">+</span> 2 channels managed</li>
+                        <li><span class="check">+</span> Monthly performance reports</li>
+                        <li><span class="check">+</span> Landing page optimization</li>
+                        <li><span class="check">+</span> Bi-weekly strategy calls</li>
+                        <li><span class="check">+</span> Email support (24hr response)</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-outline" style="width: 100%;">Get Started</a>
+                </div>
+
+                <div class="pricing-card featured reveal">
+                    <div class="plan-name">Scale</div>
+                    <div class="price" data-monthly="12,000" data-annual="9,600">$12,000<span>/mo</span></div>
+                    <div class="plan-desc">For growth-stage companies scaling acquisition and retention simultaneously.
+                    </div>
+                    <ul class="features-list">
+                        <li><span class="check">+</span> 4 channels managed</li>
+                        <li><span class="check">+</span> Creative production</li>
+                        <li><span class="check">+</span> A/B testing (4 tests/mo)</li>
+                        <li><span class="check">+</span> Weekly reports & calls</li>
+                        <li><span class="check">+</span> Dedicated growth strategist</li>
+                        <li><span class="check">+</span> Slack channel access</li>
+                        <li><span class="check">+</span> Content strategy & production</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-primary" style="width: 100%;">Get Started</a>
+                </div>
+
+                <div class="pricing-card reveal">
+                    <div class="plan-name">Enterprise</div>
+                    <div class="price" data-monthly="25,000" data-annual="20,000">$25,000+<span>/mo</span></div>
+                    <div class="plan-desc">For established companies that need a full-stack growth team.</div>
+                    <ul class="features-list">
+                        <li><span class="check">+</span> Unlimited channels</li>
+                        <li><span class="check">+</span> Custom analytics dashboards</li>
+                        <li><span class="check">+</span> Executive strategy sessions</li>
+                        <li><span class="check">+</span> Quarterly planning workshops</li>
+                        <li><span class="check">+</span> Dedicated account team</li>
+                        <li><span class="check">+</span> Priority support (2hr)</li>
+                        <li><span class="check">+</span> Performance-based pricing</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-outline" style="width: 100%;">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--surface">
+        <div class="container" style="max-width: 720px;">
+            <div class="section-header reveal">
+                <p class="overline">FAQ</p>
+                <h2 class="h3">Common questions.</h2>
+            </div>
+            <div class="reveal">
+                <div class="accordion-item active">
+                    <button class="accordion-trigger">What's the minimum commitment?<span class="icon">+</span></button>
+                    <div class="accordion-content">
+                        <p>We work on a month-to-month basis after an initial 3-month onboarding period. No long-term
+                            lock-ins.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-trigger">How quickly will we see results?<span
+                            class="icon">+</span></button>
+                    <div class="accordion-content">
+                        <p>Most clients see measurable improvements within the first 60 days. However, compounding
+                            growth typically accelerates after 90 days of systematic optimization.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-trigger">Can I change plans?<span class="icon">+</span></button>
+                    <div class="accordion-content">
+                        <p>Absolutely. Upgrade or downgrade at any time. We'll adjust scope and strategy to match your
+                            new tier immediately.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-trigger">What's included in reporting?<span class="icon">+</span></button>
+                    <div class="accordion-content">
+                        <p>Real-time dashboards with full visibility into performance data, spend, ROAS, pipeline
+                            metrics, and attribution. No black boxes.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-trigger">Do you work with our existing tools?<span
+                            class="icon">+</span></button>
+                    <div class="accordion-content">
+                        <p>Yes. We integrate with your existing analytics, CRM, and marketing stack. We work with
+                            HubSpot, Salesforce, Google Analytics, Mixpanel, and more.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section cta-section">
+        <div class="container">
+            <h2 class="h2 reveal">Not sure which plan fits?</h2>
+            <p class="reveal">Let's talk. We'll recommend the right scope based on your goals and budget.</p>
+            <div class="reveal" style="margin-top: var(--space-8);"><a href="contact.html"
+                    class="btn btn-primary btn-lg">Get a Custom Proposal</a></div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><a href="index.html" class="logo"><img src="assets/images/logo.png" alt="BrandGrowth Media" class="logo-img"></a>
+                    <p>A data-obsessed growth engineering firm.</p>
+                    <div class="footer-social"><a href="#">in</a><a href="#">ig</a><a href="#">yt</a><a href="#">tw</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h5>Company</h5><a href="about.html">About Us</a><a href="process.html">Our Process</a><a
+                        href="careers.html">Careers</a><a href="testimonials.html">Testimonials</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Services</h5><a href="services.html">Website Development</a><a href="services.html">Google Ads</a><a href="services.html">Facebook &amp; Instagram Ads</a><a href="services.html">Local SEO</a><a href="services.html">Social Media</a><a href="services.html">AI Automation</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Resources</h5><a href="resources.html">Blog</a><a href="resources.html">Guides</a><a
+                        href="case-studies.html">Case Studies</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Connect</h5><a href="contact.html">Contact Us</a><a href="pricing.html">Pricing</a><a
+                        href="solutions.html">Industries</a><a href="portal.html">Client Portal</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 BrandGrowth Media. All rights reserved.</p>
+                <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="js/pages.js"></script>
+</body>
+
+</html>

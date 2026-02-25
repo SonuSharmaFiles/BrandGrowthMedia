@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — BrandGrowth Media</title>
+    <meta name="description"
+        content="Start a conversation about your growth goals. Free strategy assessment, no pitch decks.">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+
+<body>
+    <div class="scroll-progress"></div>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="BrandGrowth Media"
+                    class="logo-img"></a>
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="case-studies.html" class="nav-link">Case Studies</a></li>
+                    <li><a href="process.html" class="nav-link">Process</a></li>
+                    <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                    <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-cta"><a href="contact.html" class="btn btn-primary btn-sm">Get a Proposal</a></div>
+            <button class="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+    <div class="mobile-nav-overlay">
+        <div class="mobile-nav-links"><a href="index.html">Home</a><a href="services.html">Services</a><a
+                href="case-studies.html">Case Studies</a><a href="process.html">Process</a><a
+                href="pricing.html">Pricing</a><a href="contact.html">Contact</a></div>
+    </div>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-grid">
+                <div class="page-hero-content">
+                    <p class="overline reveal">Contact</p>
+                    <h1 class="h1 reveal">Let's talk growth.</h1>
+                    <p class="reveal">No pitch decks. No fluff. Just a real conversation about your goals and how we can
+                        help.
+                    </p>
+                </div>
+                <div class="page-hero-visual reveal-right">
+                    <div class="hero-3d-envelope">
+                        <div class="envelope-sparkle"></div>
+                        <div class="envelope-sparkle"></div>
+                        <div class="envelope-sparkle"></div>
+                        <div class="envelope-message">
+                            <div class="message-line"></div>
+                            <div class="message-line"></div>
+                            <div class="message-line"></div>
+                            <div class="message-line"></div>
+                        </div>
+                        <div class="envelope-flap"></div>
+                        <div class="envelope-body">
+                            <div class="envelope-pattern"></div>
+                        </div>
+                        <div class="envelope-flap-inner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+        <div class="container">
+            <!-- Info Cards -->
+            <div class="contact-info-cards reveal" style="margin-bottom:var(--space-16);">
+                <div class="contact-info-card">
+                    <h5>Email</h5>
+                    <p>hello@brandgrowth.media</p>
+                </div>
+                <div class="contact-info-card">
+                    <h5>Phone</h5>
+                    <p>+1 (555) 234-5678</p>
+                </div>
+                <div class="contact-info-card">
+                    <h5>Office</h5>
+                    <p>San Francisco, CA</p>
+                </div>
+                <div class="contact-info-card">
+                    <h5>Hours</h5>
+                    <p>Mon–Fri, 9–6 PST</p>
+                </div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="reveal">
+                    <h2 class="h4" style="margin-bottom:var(--space-2);">Send us a message</h2>
+                    <p style="color:var(--steel);font-size:var(--text-sm);margin-bottom:var(--space-8);">We respond
+                        within 24 hours.</p>
+                    <form id="contact-form">
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);">
+                            <div class="form-group"><label for="first-name">First Name *</label><input type="text"
+                                    id="first-name" class="form-input" placeholder="John" required></div>
+                            <div class="form-group"><label for="last-name">Last Name *</label><input type="text"
+                                    id="last-name" class="form-input" placeholder="Smith" required></div>
+                        </div>
+                        <div class="form-group"><label for="email">Work Email *</label><input type="email" id="email"
+                                class="form-input" placeholder="john@company.com" required></div>
+                        <div class="form-group"><label for="company">Company</label><input type="text" id="company"
+                                class="form-input" placeholder="Your Company"></div>
+                        <div class="form-group">
+                            <label for="service">Interested in</label>
+                            <select id="service" class="form-select">
+                                <option value="">Select a service</option>
+                                <option value="website-development">Website Development</option>
+                                <option value="google-ads">Google Ads Management</option>
+                                <option value="social-ads">Facebook &amp; Instagram Ads</option>
+                                <option value="local-seo">Local SEO &amp; Google Maps</option>
+                                <option value="social-media">Social Media Management</option>
+                                <option value="ai-automation">AI Automation &amp; Lead Nurturing</option>
+                                <option value="full-service">Full-Service Partnership</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label for="budget">Monthly Budget</label>
+                            <select id="budget" class="form-select">
+                                <option value="">Select range</option>
+                                <option>Under $5,000/mo</option>
+                                <option>$5,000 – $12,000/mo</option>
+                                <option>$12,000 – $25,000/mo</option>
+                                <option>$25,000+/mo</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label for="message">About your project *</label><textarea id="message"
+                                class="form-textarea" placeholder="What are your growth goals?" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Send Message</button>
+                    </form>
+                </div>
+
+                <div>
+                    <div class="card reveal" style="margin-bottom:var(--space-6);">
+                        <h4 class="h5" style="margin-bottom:var(--space-6);">What to expect</h4>
+                        <ul style="display:flex;flex-direction:column;gap:var(--space-4);">
+                            <li
+                                style="display:flex;gap:var(--space-3);font-size:var(--text-sm);color:var(--steel-light);">
+                                <span style="color:var(--amber);font-weight:700;flex-shrink:0;">01</span> Free strategy
+                                assessment
+                            </li>
+                            <li
+                                style="display:flex;gap:var(--space-3);font-size:var(--text-sm);color:var(--steel-light);">
+                                <span style="color:var(--amber);font-weight:700;flex-shrink:0;">02</span> Response
+                                within 24 hours
+                            </li>
+                            <li
+                                style="display:flex;gap:var(--space-3);font-size:var(--text-sm);color:var(--steel-light);">
+                                <span style="color:var(--amber);font-weight:700;flex-shrink:0;">03</span> Talk to a
+                                strategist, not sales
+                            </li>
+                            <li
+                                style="display:flex;gap:var(--space-3);font-size:var(--text-sm);color:var(--steel-light);">
+                                <span style="color:var(--amber);font-weight:700;flex-shrink:0;">04</span> Custom
+                                proposal in 5 days
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="contact-map reveal">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50484.70563895795!2d-122.43149945!3d37.77492955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1"
+                            allowfullscreen loading="lazy" title="Office Location"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><a href="index.html" class="logo"><img src="assets/images/logo.png"
+                            alt="BrandGrowth Media" class="logo-img"></a>
+                    <p>A data-obsessed growth engineering firm.</p>
+                    <div class="footer-social"><a href="#">in</a><a href="#">ig</a><a href="#">yt</a><a href="#">tw</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h5>Company</h5><a href="about.html">About Us</a><a href="process.html">Our Process</a><a
+                        href="careers.html">Careers</a><a href="testimonials.html">Testimonials</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Services</h5><a href="services.html">Website Development</a><a href="services.html">Google Ads</a><a href="services.html">Facebook &amp; Instagram Ads</a><a href="services.html">Local SEO</a><a href="services.html">Social Media</a><a href="services.html">AI Automation</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Resources</h5><a href="resources.html">Blog</a><a href="resources.html">Guides</a><a
+                        href="case-studies.html">Case Studies</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Connect</h5><a href="contact.html">Contact Us</a><a href="pricing.html">Pricing</a><a
+                        href="solutions.html">Industries</a><a href="portal.html">Client Portal</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 BrandGrowth Media. All rights reserved.</p>
+                <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="js/pages.js"></script>
+</body>
+
+</html>

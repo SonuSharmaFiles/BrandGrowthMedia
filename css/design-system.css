@@ -1,0 +1,491 @@
+/* ============================================================
+   BrandGrowth Media — Design System v2
+   Brand: Data-obsessed growth engineering
+   Palette: Deep Navy + Signal Amber + Steel
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  /* Brand Colors */
+  --navy: #0B1222;
+  --navy-light: #141C2B;
+  --navy-mid: #1A2538;
+  --amber: #F5A623;
+  --amber-dark: #D4891A;
+  --amber-glow: rgba(245, 166, 35, 0.12);
+  --white: #E8ECF1;
+  --white-pure: #FFFFFF;
+  --canvas: #FAFBFC;
+  --steel: #64748B;
+  --steel-light: #94A3B8;
+  --steel-dark: #475569;
+  --border: rgba(100, 116, 139, 0.15);
+  --border-light: rgba(232, 236, 241, 0.08);
+  --surface: #141C2B;
+  --success: #34D399;
+  --error: #F87171;
+
+  /* Typography */
+  --font-heading: 'Space Grotesk', 'Helvetica Neue', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Type Scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.5rem;
+  --text-4xl: 3.25rem;
+  --text-5xl: 4rem;
+  --text-6xl: 5rem;
+  --text-7xl: 6.5rem;
+
+  /* Line Heights */
+  --leading-tight: 1.08;
+  --leading-snug: 1.2;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Layout */
+  --max-width: 1280px;
+  --max-width-narrow: 720px;
+  --max-width-wide: 1440px;
+  --grid-gap: 2rem;
+  --section-py: clamp(4rem, 8vw, 7rem);
+  --section-px: clamp(1.5rem, 5vw, 4rem);
+
+  /* Borders */
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+
+  /* Transitions */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 180ms;
+  --duration-base: 300ms;
+  --duration-slow: 600ms;
+
+  /* Z-index */
+  --z-header: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+}
+
+/* --- Reset --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: var(--leading-normal);
+  color: var(--white);
+  background-color: var(--navy);
+  overflow-x: hidden;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease);
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* --- Typography --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  color: var(--white-pure);
+}
+
+.h-display {
+  font-size: clamp(var(--text-3xl), 4.5vw, var(--text-5xl));
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.h1 {
+  font-size: clamp(var(--text-3xl), 4.5vw, var(--text-5xl));
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.h2 {
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.h3 {
+  font-size: clamp(var(--text-xl), 2vw, var(--text-3xl));
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.h4 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.h5 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.overline {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.text-muted {
+  color: var(--steel);
+}
+
+.text-amber {
+  color: var(--amber);
+}
+
+/* --- Layout --- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-inline: var(--section-px);
+}
+
+.container--narrow {
+  max-width: var(--max-width-narrow);
+}
+
+.container--wide {
+  max-width: var(--max-width-wide);
+}
+
+.section {
+  padding-block: var(--section-py);
+}
+
+.section--surface {
+  background: var(--surface);
+}
+
+.section--canvas {
+  background: var(--canvas);
+  color: var(--navy);
+}
+
+.section--canvas h1,
+.section--canvas h2,
+.section--canvas h3,
+.section--canvas h4,
+.section--canvas h5 {
+  color: var(--navy);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  gap: var(--grid-gap);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-asymmetric {
+  grid-template-columns: 1.15fr 0.85fr;
+}
+
+/* Flex */
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+/* Spacing helpers */
+.text-center {
+  text-align: center;
+}
+
+.mt-2 {
+  margin-top: var(--space-8);
+}
+
+.mb-2 {
+  margin-bottom: var(--space-8);
+}
+
+/* --- Animations --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes drawLine {
+  from {
+    stroke-dashoffset: 1000;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--duration-slow) var(--ease),
+    transform var(--duration-slow) var(--ease);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity var(--duration-slow) var(--ease),
+    transform var(--duration-slow) var(--ease);
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity var(--duration-slow) var(--ease),
+    transform var(--duration-slow) var(--ease);
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity var(--duration-slow) var(--ease),
+    transform var(--duration-slow) var(--ease);
+}
+
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger */
+.stagger-children .reveal:nth-child(1) {
+  transition-delay: 0ms;
+}
+
+.stagger-children .reveal:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.stagger-children .reveal:nth-child(3) {
+  transition-delay: 160ms;
+}
+
+.stagger-children .reveal:nth-child(4) {
+  transition-delay: 240ms;
+}
+
+.stagger-children .reveal:nth-child(5) {
+  transition-delay: 320ms;
+}
+
+.stagger-children .reveal:nth-child(6) {
+  transition-delay: 400ms;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-asymmetric {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .grid-4,
+  .grid-3,
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 15px;
+  }
+}
