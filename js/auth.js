@@ -1,20 +1,14 @@
 /* ============================================================
-   BrandGrowthMedia — Auth & Onboarding System
-   Powered by Supabase
+   BrandGrowthMedia — Project Inquiry Popup System
+   No login required — opens directly on "Get Started" click
    ============================================================ */
 
 (function () {
   'use strict';
 
-  // ---- Supabase Config ----
-  const SUPABASE_URL = 'https://zvyxphrynnuukyhsrqcg.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_2RBY7xSt4kZTpmCj3Urw0A_z1e648X9';
-
-  let sb = null;
-  let currentUser = null;
   let selectedTier = null;
   let selectedPrice = null;
-  let addedServices = []; // additional services added by user
+  let addedServices = [];
 
   // ---- All Services Catalog ----
   const ALL_SERVICES = {
@@ -23,9 +17,9 @@
       url: 'services/website-development.html',
       billing: 'one-time',
       tiers: [
-        { key: 'wd-starter', name: 'Starter Growth Site', price: 899 },
-        { key: 'wd-business', name: 'Business Growth Engine', price: 1499 },
-        { key: 'wd-authority', name: 'Authority & Scale System', price: 2999 }
+        { key: 'wd-starter', name: 'Starter Growth Site', price: 499 },
+        { key: 'wd-business', name: 'Business Growth Engine', price: 899 },
+        { key: 'wd-authority', name: 'Authority & Scale System', price: 1499 }
       ]
     },
     'performance-marketing': {
@@ -53,9 +47,9 @@
       url: 'services/google-ads.html',
       billing: '/month',
       tiers: [
-        { key: 'ga-starter', name: 'Starter', price: 500 },
-        { key: 'ga-growth', name: 'Growth', price: 1200 },
-        { key: 'ga-domination', name: 'Domination', price: 2500 }
+        { key: 'ga-launch', name: 'Search Launch', price: 900 },
+        { key: 'ga-retargeting', name: 'Search + Retargeting', price: 1600 },
+        { key: 'ga-fullfunnel', name: 'Full-Funnel Google Growth', price: 3000 }
       ]
     },
     'local-seo': {
@@ -112,208 +106,41 @@
   }
 
   // ---- Initialize ----
-  document.addEventListener('DOMContentLoaded', async () => {
-    if (!window.supabase) {
-      console.warn('Supabase SDK not loaded');
-      return;
-    }
-    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // Restore pending tier from sessionStorage (survives OAuth redirect)
-    const pendingTier = sessionStorage.getItem('bgm_pending_tier');
-    const pendingPrice = sessionStorage.getItem('bgm_pending_price');
-    if (pendingTier) {
-      selectedTier = pendingTier;
-      selectedPrice = parseInt(pendingPrice) || 0;
-    }
-
+  document.addEventListener('DOMContentLoaded', () => {
     injectModals();
-    injectHeaderAuth();
     wireGetStartedButtons();
-    await checkAuthState();
-
-    sb.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'SIGNED_IN' && session) {
-        currentUser = session.user;
-        syncHeader(true);
-
-        // If returning from OAuth with a pending tier, show onboarding
-        if (selectedTier && sessionStorage.getItem('bgm_pending_tier')) {
-          sessionStorage.removeItem('bgm_pending_tier');
-          sessionStorage.removeItem('bgm_pending_price');
-          setTimeout(() => showOnboardingModal(), 300);
-        }
-      } else if (event === 'SIGNED_OUT') {
-        currentUser = null;
-        syncHeader(false);
-      }
-    });
   });
 
-  // ---- Check Auth State ----
-  async function checkAuthState() {
-    try {
-      const { data: { session } } = await sb.auth.getSession();
-      if (session) {
-        currentUser = session.user;
-        syncHeader(true);
-      } else {
-        syncHeader(false);
-      }
-    } catch (e) {
-      console.error('Auth check failed:', e);
-      syncHeader(false);
-    }
-  }
-
   // ============================================================
-  //  HEADER LOGIN BUTTON
-  // ============================================================
-
-  function injectHeaderAuth() {
-    const navCta = document.querySelector('.nav-cta');
-    if (navCta) {
-      const loginBtn = document.createElement('button');
-      loginBtn.className = 'header-login-btn';
-      loginBtn.id = 'header-login-btn';
-      loginBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Login`;
-      loginBtn.addEventListener('click', () => showAuthModal('login'));
-      navCta.insertBefore(loginBtn, navCta.firstChild);
-
-      const avatarWrap = document.createElement('div');
-      avatarWrap.className = 'header-user-wrap';
-      avatarWrap.id = 'header-user-wrap';
-      avatarWrap.style.display = 'none';
-      avatarWrap.innerHTML = `
-        <button class="header-user-avatar" id="header-avatar-btn">
-          <span class="avatar-initial" id="avatar-initial">U</span>
-        </button>
-        <div class="header-user-dropdown" id="header-user-dropdown">
-          <div class="dropdown-user-info">
-            <span class="dropdown-user-name" id="dropdown-user-name">User</span>
-            <span class="dropdown-user-email" id="dropdown-user-email">user@email.com</span>
-          </div>
-          <div class="dropdown-divider"></div>
-          <button class="dropdown-item" id="dropdown-logout">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-            Sign Out
-          </button>
-        </div>
-      `;
-      navCta.insertBefore(avatarWrap, navCta.firstChild);
-
-      document.getElementById('header-avatar-btn').addEventListener('click', (e) => {
-        e.stopPropagation();
-        document.getElementById('header-user-dropdown').classList.toggle('show');
-      });
-
-      document.getElementById('dropdown-logout').addEventListener('click', async () => {
-        await sb.auth.signOut();
-        currentUser = null;
-        syncHeader(false);
-        document.getElementById('header-user-dropdown').classList.remove('show');
-      });
-
-      document.addEventListener('click', () => {
-        const dd = document.getElementById('header-user-dropdown');
-        if (dd) dd.classList.remove('show');
-      });
-    }
-
-    const mobileLinks = document.querySelector('.mobile-nav-links');
-    if (mobileLinks) {
-      const mobileLogin = document.createElement('a');
-      mobileLogin.href = '#';
-      mobileLogin.id = 'mobile-login-link';
-      mobileLogin.textContent = 'Login';
-      mobileLogin.addEventListener('click', (e) => {
-        e.preventDefault();
-        const toggle = document.querySelector('.mobile-toggle');
-        const overlay = document.querySelector('.mobile-nav-overlay');
-        if (toggle) toggle.classList.remove('active');
-        if (overlay) overlay.classList.remove('active');
-        document.body.style.overflow = '';
-        showAuthModal('login');
-      });
-      mobileLinks.appendChild(mobileLogin);
-    }
-  }
-
-  function syncHeader(isLoggedIn) {
-    const loginBtn = document.getElementById('header-login-btn');
-    const userWrap = document.getElementById('header-user-wrap');
-    const mobileLogin = document.getElementById('mobile-login-link');
-
-    if (isLoggedIn && currentUser) {
-      const email = currentUser.email || '';
-      const name = currentUser.user_metadata?.full_name || email.split('@')[0] || 'User';
-      const initial = name.charAt(0).toUpperCase();
-
-      if (loginBtn) loginBtn.style.display = 'none';
-      if (userWrap) {
-        userWrap.style.display = 'flex';
-        document.getElementById('avatar-initial').textContent = initial;
-        document.getElementById('dropdown-user-name').textContent = name;
-        document.getElementById('dropdown-user-email').textContent = email;
-      }
-      if (mobileLogin) {
-        mobileLogin.textContent = name;
-        mobileLogin.onclick = (e) => { e.preventDefault(); };
-      }
-    } else {
-      if (loginBtn) loginBtn.style.display = 'inline-flex';
-      if (userWrap) userWrap.style.display = 'none';
-      if (mobileLogin) {
-        mobileLogin.textContent = 'Login';
-        mobileLogin.onclick = (e) => {
-          e.preventDefault();
-          const toggle = document.querySelector('.mobile-toggle');
-          const overlay = document.querySelector('.mobile-nav-overlay');
-          if (toggle) toggle.classList.remove('active');
-          if (overlay) overlay.classList.remove('active');
-          document.body.style.overflow = '';
-          showAuthModal('login');
-        };
-      }
-    }
-  }
-
-  // ============================================================
-  //  GET STARTED BUTTONS
+  //  GET STARTED BUTTONS — Opens popup directly, no login
   // ============================================================
 
   function wireGetStartedButtons() {
     document.querySelectorAll('[data-tier]').forEach(btn => {
-      btn.addEventListener('click', async (e) => {
+      btn.addEventListener('click', (e) => {
         e.preventDefault();
         selectedTier = btn.dataset.tier;
         selectedPrice = parseInt(btn.dataset.price);
-
-        if (currentUser) {
-          showOnboardingModal();
-        } else {
-          showAuthModal('signup');
-        }
+        showOnboardingModal();
       });
     });
   }
 
   // ============================================================
-  //  AUTH MODAL
+  //  ONBOARDING / REQUIREMENTS MODAL
   // ============================================================
 
-  function showAuthModal(mode) {
+  function showOnboardingModal() {
     const overlay = document.getElementById('bgm-modal-overlay');
-    const authCard = document.getElementById('bgm-auth-card');
     const obCard = document.getElementById('bgm-onboarding-card');
     if (!overlay) return;
 
-    authCard.classList.add('active');
-    obCard.classList.remove('active');
+    obCard.classList.add('active');
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
-    switchAuthTab(mode || 'signup');
-    clearAuthErrors();
+
+    prefillOnboarding();
+    populateRecommendedServices();
   }
 
   function hideAllModals() {
@@ -323,157 +150,14 @@
     document.body.style.overflow = '';
 
     setTimeout(() => {
-      document.getElementById('bgm-auth-card').classList.remove('active');
       document.getElementById('bgm-onboarding-card').classList.remove('active');
-      clearAuthErrors();
     }, 350);
   }
 
-  // Smooth crossfade from auth card → onboarding card
-  function transitionToOnboarding() {
-    const authCard = document.getElementById('bgm-auth-card');
-    const obCard = document.getElementById('bgm-onboarding-card');
-
-    // Fade out auth card
-    authCard.classList.add('exiting');
-
-    setTimeout(() => {
-      authCard.classList.remove('active', 'exiting');
-
-      // Pre-fill onboarding data
-      prefillOnboarding();
-      populateRecommendedServices();
-
-      // Fade in onboarding card
-      obCard.classList.add('active');
-    }, 300);
-  }
-
-  function switchAuthTab(tab) {
-    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.auth-form-panel').forEach(p => p.classList.remove('active'));
-    const tabEl = document.querySelector(`.auth-tab[data-tab="${tab}"]`);
-    const panelEl = document.getElementById(`auth-${tab}-panel`);
-    if (tabEl) tabEl.classList.add('active');
-    if (panelEl) panelEl.classList.add('active');
-  }
-
-  function clearAuthErrors() {
-    document.querySelectorAll('.auth-error').forEach(el => {
-      el.textContent = '';
-      el.style.display = 'none';
-    });
-  }
-
-  function showAuthError(panelId, message) {
-    const el = document.querySelector(`#${panelId} .auth-error`);
-    if (el) { el.textContent = message; el.style.display = 'block'; }
-  }
-
-  // Signup handler
-  async function handleSignup(e) {
-    e.preventDefault();
-    const form = e.target;
-    const email = form.querySelector('[name="signup-email"]').value.trim();
-    const password = form.querySelector('[name="signup-password"]').value;
-    const confirmPw = form.querySelector('[name="signup-confirm"]').value;
-    const submitBtn = form.querySelector('button[type="submit"]');
-
-    if (password !== confirmPw) { showAuthError('auth-signup-panel', 'Passwords do not match.'); return; }
-    if (password.length < 6) { showAuthError('auth-signup-panel', 'Password must be at least 6 characters.'); return; }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Creating Account...';
-
-    try {
-      const { data, error } = await sb.auth.signUp({ email, password });
-      if (error) throw error;
-      currentUser = data.user;
-      form.reset();
-      transitionToOnboarding();
-    } catch (err) {
-      showAuthError('auth-signup-panel', err.message || 'Signup failed. Please try again.');
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Create Account';
-    }
-  }
-
-  // Login handler
-  async function handleLogin(e) {
-    e.preventDefault();
-    const form = e.target;
-    const email = form.querySelector('[name="login-email"]').value.trim();
-    const password = form.querySelector('[name="login-password"]').value;
-    const submitBtn = form.querySelector('button[type="submit"]');
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Signing In...';
-
-    try {
-      const { data, error } = await sb.auth.signInWithPassword({ email, password });
-      if (error) throw error;
-      currentUser = data.user;
-      form.reset();
-
-      if (selectedTier) {
-        transitionToOnboarding();
-      } else {
-        hideAllModals();
-      }
-    } catch (err) {
-      showAuthError('auth-login-panel', err.message || 'Login failed. Check your credentials.');
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Sign In';
-    }
-  }
-
-  // Google OAuth
-  async function handleGoogleAuth() {
-    try {
-      // Save pending tier so it survives the OAuth redirect
-      if (selectedTier) {
-        sessionStorage.setItem('bgm_pending_tier', selectedTier);
-        sessionStorage.setItem('bgm_pending_price', selectedPrice);
-      }
-      const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.href } });
-      if (error) throw error;
-    } catch (err) { alert('Google sign-in failed: ' + (err.message || 'Unknown error')); }
-  }
-
-
-
-  // ============================================================
-  //  ONBOARDING MODAL
-  // ============================================================
-
   function prefillOnboarding() {
-    const modal = document.getElementById('bgm-onboarding-card');
-    if (!modal) return;
-
-    const emailField = modal.querySelector('[name="ob-email"]');
-    if (emailField && currentUser) emailField.value = currentUser.email || '';
-
-    const tierSelect = modal.querySelector('[name="ob-tier"]');
+    const tierSelect = document.querySelector('[name="ob-tier"]');
     if (tierSelect && selectedTier) tierSelect.value = selectedTier;
-
     updatePaymentButton();
-  }
-
-  function showOnboardingModal() {
-    const overlay = document.getElementById('bgm-modal-overlay');
-    const authCard = document.getElementById('bgm-auth-card');
-    const obCard = document.getElementById('bgm-onboarding-card');
-    if (!overlay) return;
-
-    authCard.classList.remove('active');
-    obCard.classList.add('active');
-    overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-
-    prefillOnboarding();
-    populateRecommendedServices();
   }
 
   function updatePaymentButton() {
@@ -495,9 +179,9 @@
     const total = primaryPrice + addonsTotal;
 
     if (addonsTotal > 0) {
-      payBtn.innerHTML = `Continue to Payment — <strong>$${total.toLocaleString()}</strong> <span class="ob-price-breakdown">(Plan $${primaryPrice.toLocaleString()} + Add-ons $${addonsTotal.toLocaleString()})</span>`;
+      payBtn.innerHTML = `Submit Inquiry — <strong>$${total.toLocaleString()}</strong> <span class="ob-price-breakdown">(Plan $${primaryPrice.toLocaleString()} + Add-ons $${addonsTotal.toLocaleString()})</span>`;
     } else {
-      payBtn.innerHTML = `Continue to Payment — <strong>$${total.toLocaleString()}</strong>`;
+      payBtn.innerHTML = `Submit Inquiry — <strong>$${total.toLocaleString()}</strong>`;
     }
   }
 
@@ -513,13 +197,11 @@
     addedServices = [];
 
     const currentServiceKey = detectCurrentService();
-
-    // Determine base path for links
     const isInSubfolder = window.location.pathname.includes('/services/');
     const basePath = isInSubfolder ? '' : 'services/';
 
     Object.entries(ALL_SERVICES).forEach(([key, service]) => {
-      if (key === currentServiceKey) return; // skip current service
+      if (key === currentServiceKey) return;
 
       const billingLabel = service.billing === 'one-time' ? ' one-time' : service.billing;
 
@@ -557,8 +239,7 @@
       serviceEl.querySelectorAll('.ob-view-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
-          const url = btn.dataset.url;
-          window.open(url, '_blank');
+          window.open(btn.dataset.url, '_blank');
         });
       });
 
@@ -573,13 +254,11 @@
 
           const existing = addedServices.findIndex(s => s.key === tierKey);
           if (existing >= 0) {
-            // Remove
             addedServices.splice(existing, 1);
             btn.textContent = 'Add';
             btn.classList.remove('added');
             document.getElementById(`ob-row-${tierKey}`).classList.remove('added');
           } else {
-            // Remove any other tier from the same service first
             const sameServiceKeys = ALL_SERVICES[Object.keys(ALL_SERVICES).find(k => ALL_SERVICES[k].name === serviceName)]?.tiers.map(t => t.key) || [];
             sameServiceKeys.forEach(k => {
               const idx = addedServices.findIndex(s => s.key === k);
@@ -634,7 +313,6 @@
     const submitBtn = document.getElementById('ob-payment-btn');
     const errorEl = document.getElementById('ob-error');
 
-    // Build address from parts
     const city = form.querySelector('[name="ob-city"]').value.trim();
     const state = form.querySelector('[name="ob-state"]').value.trim();
     const zip = form.querySelector('[name="ob-zip"]').value.trim();
@@ -642,7 +320,6 @@
     const address = [city, state, zip, country].filter(Boolean).join(', ');
 
     const data = {
-      user_id: currentUser.id,
       full_name: form.querySelector('[name="ob-name"]').value.trim(),
       business_name: form.querySelector('[name="ob-business"]').value.trim(),
       email: form.querySelector('[name="ob-email"]').value.trim(),
@@ -651,7 +328,9 @@
       selected_tier: selectedTier,
       tier_price: selectedPrice,
       requirements: form.querySelector('[name="ob-requirements"]').value.trim(),
-      website_url: form.querySelector('[name="ob-website"]').value.trim()
+      website_url: form.querySelector('[name="ob-website"]').value.trim(),
+      added_services: addedServices.map(s => s.name).join(', '),
+      submitted_at: new Date().toISOString()
     };
 
     if (!data.full_name || !data.business_name || !data.email) {
@@ -662,16 +341,18 @@
     submitBtn.disabled = true;
     submitBtn.innerHTML = 'Submitting...';
 
+    // Simulate submission (replace with your own endpoint if needed)
     try {
-      const { error } = await sb.from('onboarding').insert([data]);
-      if (error) throw error;
+      // You can replace this with a real API call, e.g.:
+      // await fetch('https://your-api.com/inquiries', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data) });
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       hideAllModals();
       form.reset();
       addedServices = [];
       showSuccessToast();
     } catch (err) {
-      if (errorEl) { errorEl.textContent = err.message || 'Submission failed. Please try again.'; errorEl.style.display = 'block'; }
+      if (errorEl) { errorEl.textContent = 'Submission failed. Please try again.'; errorEl.style.display = 'block'; }
     } finally {
       submitBtn.disabled = false;
       updatePaymentButton();
@@ -685,7 +366,7 @@
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
       <div>
         <strong>You're all set!</strong>
-        <span>Our team will reach out shortly to get your project started.</span>
+        <span>Our team will review your requirements and reach out shortly.</span>
       </div>
     `;
     document.body.appendChild(toast);
@@ -697,7 +378,7 @@
   }
 
   // ============================================================
-  //  INJECT MODAL HTML (Single Overlay, Two Cards)
+  //  INJECT MODAL HTML (Onboarding Card Only — No Auth Card)
   // ============================================================
 
   function injectModals() {
@@ -705,86 +386,14 @@
     wrapper.innerHTML = `
     <div class="auth-overlay" id="bgm-modal-overlay">
 
-      <!-- Auth Card -->
-      <div class="auth-modal auth-panel active" id="bgm-auth-card">
-        <button class="auth-close" id="auth-close-btn" aria-label="Close">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-
-        <div class="auth-header">
-          <div class="auth-logo">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F6A724" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <h2 class="auth-title">Welcome to BrandGrowthMedia</h2>
-          <p class="auth-subtitle">Start your growth journey today</p>
-        </div>
-
-        <div class="auth-tabs">
-          <button class="auth-tab active" data-tab="signup">Sign Up</button>
-          <button class="auth-tab" data-tab="login">Log In</button>
-        </div>
-
-        <!-- Signup Panel -->
-        <div class="auth-form-panel active" id="auth-signup-panel">
-          <form id="auth-signup-form" autocomplete="off">
-            <div class="auth-field">
-              <label>Email</label>
-              <input type="email" name="signup-email" placeholder="you@company.com" required>
-            </div>
-            <div class="auth-field">
-              <label>Password</label>
-              <input type="password" name="signup-password" placeholder="Min 6 characters" required minlength="6">
-            </div>
-            <div class="auth-field">
-              <label>Confirm Password</label>
-              <input type="password" name="signup-confirm" placeholder="Re-enter password" required minlength="6">
-            </div>
-            <div class="auth-error"></div>
-            <button type="submit" class="auth-submit-btn">Create Account</button>
-          </form>
-          <div class="auth-divider"><span>or continue with</span></div>
-          <div class="auth-social-row">
-            <button class="auth-social-btn" id="auth-google-btn" type="button">
-              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-              Google
-            </button>
-
-          </div>
-        </div>
-
-        <!-- Login Panel -->
-        <div class="auth-form-panel" id="auth-login-panel">
-          <form id="auth-login-form" autocomplete="off">
-            <div class="auth-field">
-              <label>Email</label>
-              <input type="email" name="login-email" placeholder="you@company.com" required>
-            </div>
-            <div class="auth-field">
-              <label>Password</label>
-              <input type="password" name="login-password" placeholder="Enter your password" required>
-            </div>
-            <div class="auth-error"></div>
-            <button type="submit" class="auth-submit-btn">Sign In</button>
-          </form>
-          <div class="auth-divider"><span>or continue with</span></div>
-          <div class="auth-social-row">
-            <button class="auth-social-btn auth-google-btn-login" type="button">
-              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-              Google
-            </button>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Onboarding Card -->
+      <!-- Onboarding / Requirements Card -->
       <div class="auth-modal onboarding-modal auth-panel" id="bgm-onboarding-card">
         <button class="auth-close" id="ob-close-btn" aria-label="Close">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
 
         <div class="auth-header">
-          <div class="ob-step-badge">Almost There</div>
+          <div class="ob-step-badge">Get Started</div>
           <h2 class="auth-title">Tell Us About Your Project</h2>
           <p class="auth-subtitle">Help us build the perfect growth engine for your business</p>
         </div>
@@ -859,7 +468,7 @@
           <div class="auth-error" id="ob-error"></div>
 
           <button type="submit" class="ob-payment-btn" id="ob-payment-btn">
-            Continue to Payment — <strong>$899</strong>
+            Submit Inquiry — <strong>$899</strong>
           </button>
 
           <p class="ob-disclaimer">You won't be charged now. Our team will review your requirements and prepare a custom project proposal.</p>
@@ -870,8 +479,7 @@
 
     document.body.appendChild(wrapper);
 
-    // Wire close buttons
-    document.getElementById('auth-close-btn').addEventListener('click', hideAllModals);
+    // Wire close button
     document.getElementById('ob-close-btn').addEventListener('click', hideAllModals);
 
     // Close on overlay click
@@ -879,21 +487,10 @@
       if (e.target === e.currentTarget) hideAllModals();
     });
 
-    // Tabs
-    document.querySelectorAll('.auth-tab').forEach(tab => {
-      tab.addEventListener('click', () => switchAuthTab(tab.dataset.tab));
-    });
-
-    // Forms
-    document.getElementById('auth-signup-form').addEventListener('submit', handleSignup);
-    document.getElementById('auth-login-form').addEventListener('submit', handleLogin);
+    // Form submit
     document.getElementById('ob-form').addEventListener('submit', handleOnboarding);
 
-    // Social auth
-    document.getElementById('auth-google-btn').addEventListener('click', handleGoogleAuth);
-    document.querySelector('.auth-google-btn-login').addEventListener('click', handleGoogleAuth);
-
-    // Tier select
+    // Tier select change
     document.getElementById('ob-tier-select').addEventListener('change', updatePaymentButton);
 
     // Populate tier dropdown
