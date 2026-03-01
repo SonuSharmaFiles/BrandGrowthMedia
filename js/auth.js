@@ -198,12 +198,13 @@
 
     const currentServiceKey = detectCurrentService();
     const isInSubfolder = window.location.pathname.includes('/services/');
-    const basePath = isInSubfolder ? '' : 'services/';
 
     Object.entries(ALL_SERVICES).forEach(([key, service]) => {
       if (key === currentServiceKey) return;
 
       const billingLabel = service.billing === 'one-time' ? ' one-time' : service.billing;
+      // Build correct relative URL: strip 'services/' prefix when already inside /services/
+      const viewUrl = isInSubfolder ? service.url.replace('services/', '') : service.url;
 
       const serviceEl = document.createElement('div');
       serviceEl.className = 'ob-service-item';
@@ -220,7 +221,7 @@
                 <span class="ob-tier-price">$${tier.price.toLocaleString()}${billingLabel}</span>
               </div>
               <div class="ob-tier-actions">
-                <button type="button" class="ob-view-btn" data-url="${basePath}${service.url}" title="View pricing details">View</button>
+                <button type="button" class="ob-view-btn" data-url="${viewUrl}" title="View pricing details">View</button>
                 <button type="button" class="ob-add-btn" data-tier-key="${tier.key}" data-tier-name="${tier.name}" data-tier-price="${tier.price}" data-service-name="${service.name}" title="Add to your project">Add</button>
               </div>
             </div>
